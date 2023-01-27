@@ -34,15 +34,19 @@ try:
 
     # Parsing of all vacancies boxes on the current page then parsing of requirement elements
 
-    vacancies_list = driver.find_elements(By.CLASS_NAME, "box-shadow")
+    vacancies_list = driver.find_elements(By.CLASS_NAME, "project")
 
     for vacancy in vacancies_list[:10]:
         title = vacancy.find_element(By.CLASS_NAME, "title")
         price = vacancy.find_element(By.CLASS_NAME, "cost")
         deadline = vacancy.find_element(By.CLASS_NAME, "term")
         posted_time = vacancy.find_element(By.CLASS_NAME, "timeago")
-        views = vacancy.find_element(By.XPATH, "//span[@title='Просмотры']")
-        applied = vacancy.find_element(By.XPATH, "//span[@title='Отклики']")
+        # Old code
+        # views = vacancy.find_element(By.XPATH, "//span[@title='Просмотров']")
+        views = vacancy.find_element(By.CLASS_NAME, "view-count")
+        # Old code
+        # applied = vacancy.find_element(By.XPATH, "//span[@title='Отклики']")
+        applied = vacancy.find_element(By.CLASS_NAME, "comments-count")
 
         # for each vacancy it creates a new text file and write down information in it
         with open(file=title.text, mode="w", encoding='utf8') as file:
